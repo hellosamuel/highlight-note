@@ -1,11 +1,11 @@
 import React from 'react';
+import Main from './containers/Main'
 
 function App() {
+  const title = "Highlight-Note"
   return (
-    <div className="App">
-      Highlight-Note React App
-    </div>
-  );
+    <Main title={title} />
+  )
 }
 
-export default App;
+export default App
