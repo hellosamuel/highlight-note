@@ -1,0 +1,8 @@
+{
+  "short_name": "Highlight Note React App",
+  "name": "Create Highlight Note React App",
+  "start_url": ".",
+  "display": "standalone",
+  "theme_color": "#000000",
+  "background_color": "#ffffff"
+}
