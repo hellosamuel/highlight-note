@@ -4,7 +4,7 @@
 - select word you want add highlight (by dragging or double click)
 - then select category(mark)
 - then you can see highlighted word in the text
-- you can test highlight note in [demo Page](https://hellosamuel.github.io/highlight-note/)
+- visit [here!](https://hellosamuel.github.io/highlight-note/) and enjoy :)
 
 ![sample image](./public/images/sample.png)
 
