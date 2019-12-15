@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import { Typography } from '@material-ui/core';
 
 import FilterPopover from '../../components/FilterPopover';
+import HighlightedText from './HighlightedText';
 
 const HighlightText = ({ data, category }) => {
   const [list, setList] = useState(data)
@@ -24,13 +24,11 @@ const HighlightText = ({ data, category }) => {
   return (
     <>
       {list.map(({ id, text }) => (
-        <Typography
+        <HighlightedText
           key={id}
-          gutterBottom
+          text={text}
           onMouseUp={handleMouseUp}
-        >
-          {text}
-        </Typography>
+        />
       ))}
       {filterOpen &&
         <FilterPopover

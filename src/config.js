@@ -1,10 +1,10 @@
 module.exports = {
-  preproReg: /(<.+?:{2}.+?>)/g,
-  afterproReg: /<(.+?:{2}.+?)>/g,
+  preReg: /(<.+?:{2}.+?>)/g,
+  afterReg: /<(.+?):{2}(.+?)>/g,
   data: [
     {
       id: 1,
-      text: 'The European languages are members of the same family. Their separate existence is a myth.',
+      text: 'The <European::important> languages are members of the same family. Their separate existence is a myth.',
     },
     {
       id: 2,

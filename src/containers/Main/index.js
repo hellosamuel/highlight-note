@@ -3,6 +3,7 @@ import { makeStyles } from '@material-ui/core/styles'
 import { Paper, Typography } from '@material-ui/core'
 
 import { data, category } from '../../config'
+
 import HighlightText from '../HighlightText'
 
 const useStyles = makeStyles(theme => ({
