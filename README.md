@@ -5,7 +5,9 @@
 - then select category(mark)
 - then you can see highlighted word in the text
 
-##### used Libraries
+![sample image](./public/images/sample.png)
+
+##### Used libraries
 - ReactJS
 - Material-UI
 - color-hash
