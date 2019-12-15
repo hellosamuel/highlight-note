@@ -8,7 +8,7 @@ module.exports = {
     },
     {
       id: 2,
-      text: 'For science, music, sport, etc, Europe uses the same vocabulary.',
+      text: 'For science, music, sport, etc, <Europe::important> uses the same vocabulary.',
     },
     {
       id: 3,
@@ -16,7 +16,7 @@ module.exports = {
     },
     {
       id: 4,
-      text: 'Everyone realizes why a new common language would be desirable: one could refuse to pay expensive translators.',
+      text: '<Everyone::love> realizes why a new common language would be desirable: one could refuse to pay expensive translators.',
     },
     {
       id: 5,
@@ -24,11 +24,11 @@ module.exports = {
     },
     {
       id: 6,
-      text: 'If several languages coalesce, the grammar of the resulting language is more simple and regular than that of the individual languages.',
+      text: 'If several <languages::like> coalesce, the grammar of the resulting language is more simple and regular than that of the individual languages.',
     },
     {
       id: 7,
-      text: 'The new common language will be more simple and regular than the existing European languages. It will be as simple as Occidental; in fact, it will be Occidental.',
+      text: 'The new common <language::like> will be more simple and regular than the existing European languages. It will be as simple as Occidental; in fact, it will be Occidental.',
     },
     {
       id: 8,
@@ -36,7 +36,7 @@ module.exports = {
     },
     {
       id: 9,
-      text: 'The European languages are members of the same family. Their separate existence is a myth. For science, music, sport, etc, Europe uses the same vocabulary.',
+      text: 'The European languages are members of the same family. Their separate existence is a myth. For <science::hate>, <music::love>, sport, etc, Europe uses the same vocabulary.',
     },
     {
       id: 10,
