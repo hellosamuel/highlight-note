@@ -21,16 +21,22 @@ const Main = ({ title }) => {
   const [selectedData, setSelectedData] = useState({})
 
   const handleClick = e => {
-    const { right, top } = e.currentTarget.getClientRects()[0]
-    setLocation({ left: right + 5, top })
-    setFilterOpen(true)
+    // TODO edit highlight, remove highlight
+    // const { right, top } = e.currentTarget.getClientRects()[0]
+    // setLocation({ left: right + 5, top })
+    // setFilterOpen(true)
   }
 
   const handleMouseUp = e => {
     const selection = getSelection()
     const word = selection.toString().trim()
+    const { anchorNode, anchorOffset, focusNode, focusOffset } = selection
+    if (anchorNode.parentNode.dataset.offset !== focusNode.parentNode.dataset.offset) {
+      alert('There is already highlighted word in selected section')
+      return
+    }
+
     if (word) {
-      const { anchorNode, anchorOffset, focusNode, focusOffset } = selection
       const { right, top } = selection.getRangeAt(0).getClientRects()[0]
       const isReverse = anchorOffset > focusOffset
       const anchor = isReverse ? focusNode : anchorNode
