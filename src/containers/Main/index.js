@@ -18,17 +18,47 @@ const Main = ({ title }) => {
   const [list, setList] = useState(data)
   const [filterOpen, setFilterOpen] = useState(false)
   const [location, setLocation] = useState({})
+  const [selectedData, setSelectedData] = useState({})
 
-  const handleMouseUp = () => {
-    const selection =  getSelection()
-    if (selection.toString().trim()) {
+  const handleClick = e => {
+    const { right, top } = e.currentTarget.getClientRects()[0]
+    setLocation({ left: right + 5, top })
+    setFilterOpen(true)
+  }
+
+  const handleMouseUp = e => {
+    const selection = getSelection()
+    const word = selection.toString().trim()
+    if (word) {
+      const { anchorNode, anchorOffset, focusNode, focusOffset } = selection
       const { right, top } = selection.getRangeAt(0).getClientRects()[0]
-      setFilterOpen(true)
+      const isReverse = anchorOffset > focusOffset
+      const anchor = isReverse ? focusNode : anchorNode
+      setSelectedData({
+        originTextId: parseInt(e.currentTarget.dataset.id, 10),
+        word,
+        originOffset: parseInt(anchor.parentNode.dataset.offset, 10),
+        anchorOffset: isReverse ? focusOffset : anchorOffset,
+      })
       setLocation({ left: right + 5, top })
+      setFilterOpen(true)
     }
   }
 
   const applyResult = result => {
+    const { originTextId, word, originOffset, anchorOffset } = selectedData
+    const { id, text } = list.find(({ id }) => originTextId === id)
+    const offset = originOffset + anchorOffset
+    const startPart = text.slice(0, offset)
+    const targetPart = `<${word}::${result}>`
+    const endPart = text.slice(offset + word.length)
+    setList(prevList => prevList.map(row => {
+      if (row.id === id) {
+        return ({ ...row, text: `${startPart}${targetPart}${endPart}` })
+      }
+      return row
+    }))
+    setSelectedData({})
     setFilterOpen(false)
   }
 
@@ -39,7 +69,8 @@ const Main = ({ title }) => {
       </Typography>
       <HighlightText
         data={list}
-        onMouseUp={handleMouseUp}
+        handleClick={handleClick}
+        handleMouseUp={handleMouseUp}
       />
       {filterOpen &&
         <FilterPopover

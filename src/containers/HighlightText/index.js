@@ -10,10 +10,13 @@ const colorHash = new ColorHash()
 const useStyles = makeStyles(theme => ({
   highlightText: {
     padding: theme.spacing(0.25, 0.5),
+    '&:hover': {
+      cursor: 'pointer'
+    }
   },
 }));
 
-const HighlightText = ({ data, ...handleEvent }) => {
+const HighlightText = ({ data, handleClick, handleMouseUp }) => {
   const classes = useStyles()
 
   return (
@@ -24,11 +27,13 @@ const HighlightText = ({ data, ...handleEvent }) => {
           if (preReg.test(val)) {
             const [origin, word, category] = [...val.matchAll(afterReg)][0]
             acc.push(
-              <Tooltip key={offset} title={category}>
+              <Tooltip key={offset} title={category} placement="top">
                 <Typography
                   className={classes.highlightText}
                   component="span"
                   style={{ background: colorHash.hex(category) }}
+                  onClick={handleClick}
+                  data-offset={offset}
                 >
                   {word}
                 </Typography>
@@ -37,7 +42,11 @@ const HighlightText = ({ data, ...handleEvent }) => {
             offset += origin.length
           } else if (val) {
             acc.push(
-              <Typography key={offset} component="span">
+              <Typography
+                key={offset}
+                component="span"
+                data-offset={offset}
+              >
                 {val}
               </Typography>
             )
@@ -47,7 +56,12 @@ const HighlightText = ({ data, ...handleEvent }) => {
         }, [])
 
         return (
-          <Typography key={id} gutterBottom {...handleEvent}>
+          <Typography
+            key={id}
+            data-id={id}
+            gutterBottom
+            onMouseUp={handleMouseUp}
+          >
             {highlightedText}
           </Typography>
         )
