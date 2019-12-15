@@ -1,6 +1,6 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "e5707a091b3a51b9776f49d608e419b0",
+    "revision": "a9d67309a9f46d725067a3af0cde32fb",
     "url": "/highlight-note/index.html"
   },
   {
@@ -12,8 +12,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/highlight-note/static/js/2.72359b69.chunk.js.LICENSE"
   },
   {
-    "revision": "bdd508480f9231b941b8",
-    "url": "/highlight-note/static/js/main.d908f8ba.chunk.js"
+    "revision": "586a7041b0ab71efdfad",
+    "url": "/highlight-note/static/js/main.7a9f6995.chunk.js"
   },
   {
     "revision": "9eb6a6e818b9d1eeeceb",
