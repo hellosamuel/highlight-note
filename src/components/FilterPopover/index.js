@@ -8,7 +8,16 @@ import {
 
 const FilterPopover = ({ open, location, category, applyResult }) => {
   const [value, setValue] = useState('')
-  const handleValue = e => { setValue(e.currentTarget.value) }
+  const [list, setList] = useState(category)
+  const handleValue = e => {
+    const { value } = e.currentTarget
+    setValue(value)
+
+    const updatedList = value.length
+      ? list.filter(({ name }) => name.toLowerCase().includes(value.toLowerCase()))
+      : category
+    setList(updatedList)
+  }
   const handleClick = e => { applyResult(e.currentTarget.id) }
 
   return (
@@ -26,7 +35,7 @@ const FilterPopover = ({ open, location, category, applyResult }) => {
             onChange={handleValue}
           />
         </ListItem>
-        {category.map(({ id, name }) => (
+        {list.map(({ id, name }) => (
           <ListItem
             key={id}
             id={name}
