@@ -24,6 +24,19 @@ const FilterPopover = ({ open, location, category, initialValue, applyResult }) 
   const classes = useStyles()
   const [value, setValue] = useState('')
   const [list, setList] = useState(category)
+
+  const handleList = name => {
+    setList(
+      [
+        ...category,
+        {
+          id: category[category.length - 1].id + 1,
+          name
+        }
+      ]
+    )
+  }
+
   const handleValue = e => {
     const { value } = e.currentTarget
     setValue(value)
@@ -65,12 +78,22 @@ const FilterPopover = ({ open, location, category, initialValue, applyResult }) 
             value={value}
             onChange={handleValue}
           />
+          <ListItemSecondaryAction>
+            <IconButton
+              disabled={list.length}
+              onClick={() => handleList(value)}
+            >
+              <Icon>add</Icon>
+            </IconButton>
+          </ListItemSecondaryAction>
         </ListItem>
         {list.map(({ id, name }) => (
           <ListItem
             key={id}
             id={name}
             button
+            disabled={name === initialValue}
+            selected={name === initialValue}
             onClick={e => applyResult(e.currentTarget.id)}
           >
             {name}
