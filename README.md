@@ -6,15 +6,13 @@
 - then you can see highlighted word in the text
 - visit [here!](https://hellosamuel.github.io/highlight-note/) and enjoy :)
 
-![sample image](./public/images/sample.png)
+![sample image](./public/images/latest-sample.png)
 
 ##### Used libraries
 - ReactJS
 - Material-UI
 - color-hash
 
-##### Todo
-- add new text
-- add new category(mark)
-- edit highlight word
-- delete highlight word
+##### Environment
+- Node v12.13.1
+- ES6
