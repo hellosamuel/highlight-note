@@ -16,7 +16,7 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-const HighlightText = ({ data, handleClick, handleMouseUp }) => {
+const HighlightText = ({ data, handleMouseUp }) => {
   const classes = useStyles()
 
   return (
@@ -32,7 +32,8 @@ const HighlightText = ({ data, handleClick, handleMouseUp }) => {
                   className={classes.highlightText}
                   component="span"
                   style={{ background: colorHash.hex(category) }}
-                  onClick={handleClick}
+                  data-is-highlight="true"
+                  data-category={category}
                   data-offset={offset}
                 >
                   {word}

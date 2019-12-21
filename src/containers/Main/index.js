@@ -20,13 +20,6 @@ const Main = ({ title }) => {
   const [location, setLocation] = useState({})
   const [selectedData, setSelectedData] = useState({})
 
-  const handleClick = e => {
-    // TODO edit highlight, remove highlight
-    // const { right, top } = e.currentTarget.getClientRects()[0]
-    // setLocation({ left: right + 5, top })
-    // setFilterOpen(true)
-  }
-
   const handleMouseUp = e => {
     const selection = getSelection()
     const word = selection.toString().trim()
@@ -40,11 +33,29 @@ const Main = ({ title }) => {
       const { right, top } = selection.getRangeAt(0).getClientRects()[0]
       const isReverse = anchorOffset > focusOffset
       const anchor = isReverse ? focusNode : anchorNode
+      const offset = isReverse ? focusOffset : anchorOffset
+      const startOffset = parseInt(anchor.parentNode.dataset.offset, 10) + offset
       setSelectedData({
         originTextId: parseInt(e.currentTarget.dataset.id, 10),
         word,
-        originOffset: parseInt(anchor.parentNode.dataset.offset, 10),
-        anchorOffset: isReverse ? focusOffset : anchorOffset,
+        startOffset,
+        endOffset: startOffset + word.length,
+      })
+      setLocation({ left: right + 5, top })
+      setFilterOpen(true)
+    } else if (e.target.dataset.isHighlight) {
+      const {
+        dataset: { category, offset },
+        textContent,
+        nextSibling,
+      } = e.target
+      const { right, top } = e.target.getClientRects()[0]
+      setSelectedData({
+        originTextId: parseInt(e.currentTarget.dataset.id, 10),
+        word: textContent,
+        startOffset: offset,
+        endOffset: (nextSibling && nextSibling.dataset.offset) || false,
+        initialValue: category,
       })
       setLocation({ left: right + 5, top })
       setFilterOpen(true)
@@ -52,12 +63,11 @@ const Main = ({ title }) => {
   }
 
   const applyResult = result => {
-    const { originTextId, word, originOffset, anchorOffset } = selectedData
+    const { originTextId, word, startOffset, endOffset } = selectedData
     const { id, text } = list.find(({ id }) => originTextId === id)
-    const offset = originOffset + anchorOffset
-    const startPart = text.slice(0, offset)
+    const startPart = text.slice(0, startOffset)
     const targetPart = `<${word}::${result}>`
-    const endPart = text.slice(offset + word.length)
+    const endPart = text.slice(endOffset)
     setList(prevList => prevList.map(row => {
       if (row.id === id) {
         return ({ ...row, text: `${startPart}${targetPart}${endPart}` })
@@ -75,7 +85,6 @@ const Main = ({ title }) => {
       </Typography>
       <HighlightText
         data={list}
-        handleClick={handleClick}
         handleMouseUp={handleMouseUp}
       />
       {filterOpen &&
@@ -83,6 +92,7 @@ const Main = ({ title }) => {
           open={filterOpen}
           location={location}
           category={category}
+          initialValue={selectedData.initialValue}
           applyResult={applyResult}
         />
       }

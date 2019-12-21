@@ -1,12 +1,23 @@
 import React, { useState } from 'react';
+import { makeStyles } from '@material-ui/core/styles'
 import {
   Popover,
   List,
   ListItem,
-  TextField,
+  TextField, Typography,
 } from '@material-ui/core';
+import ColorHash from 'color-hash';
 
-const FilterPopover = ({ open, location, category, applyResult }) => {
+const colorHash = new ColorHash()
+
+const useStyles = makeStyles(theme => ({
+  highlightText: {
+    padding: theme.spacing(0.25, 0.5),
+  },
+}));
+
+const FilterPopover = ({ open, location, category, initialValue, applyResult }) => {
+  const classes = useStyles()
   const [value, setValue] = useState('')
   const [list, setList] = useState(category)
   const handleValue = e => {
@@ -27,6 +38,17 @@ const FilterPopover = ({ open, location, category, applyResult }) => {
       anchorReference="anchorPosition"
     >
       <List>
+        {initialValue &&
+          <ListItem>
+            <Typography
+              className={classes.highlightText}
+              component="span"
+              style={{ background: colorHash.hex(initialValue) }}
+            >
+              {initialValue}
+            </Typography>
+          </ListItem>
+        }
         <ListItem>
           <TextField
             fullWidth
