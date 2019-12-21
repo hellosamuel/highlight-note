@@ -4,7 +4,11 @@ import {
   Popover,
   List,
   ListItem,
-  TextField, Typography,
+  ListItemSecondaryAction,
+  TextField,
+  Typography,
+  Icon,
+  IconButton,
 } from '@material-ui/core';
 import ColorHash from 'color-hash';
 
@@ -29,11 +33,11 @@ const FilterPopover = ({ open, location, category, initialValue, applyResult }) 
       : category
     setList(updatedList)
   }
-  const handleClick = e => { applyResult(e.currentTarget.id) }
 
   return (
     <Popover
       open={open}
+      onClose={() => applyResult()}
       anchorPosition={location}
       anchorReference="anchorPosition"
     >
@@ -47,6 +51,11 @@ const FilterPopover = ({ open, location, category, initialValue, applyResult }) 
             >
               {initialValue}
             </Typography>
+            <ListItemSecondaryAction>
+              <IconButton onClick={() => applyResult(initialValue)}>
+                <Icon>delete</Icon>
+              </IconButton>
+            </ListItemSecondaryAction>
           </ListItem>
         }
         <ListItem>
@@ -62,7 +71,7 @@ const FilterPopover = ({ open, location, category, initialValue, applyResult }) 
             key={id}
             id={name}
             button
-            onClick={handleClick}
+            onClick={e => applyResult(e.currentTarget.id)}
           >
             {name}
           </ListItem>

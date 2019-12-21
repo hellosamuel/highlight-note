@@ -63,10 +63,16 @@ const Main = ({ title }) => {
   }
 
   const applyResult = result => {
-    const { originTextId, word, startOffset, endOffset } = selectedData
+    if (!result) {
+      setFilterOpen(false)
+      return
+    }
+
+    const { originTextId, word, startOffset, endOffset, initialValue } = selectedData
     const { id, text } = list.find(({ id }) => originTextId === id)
+    const isDelete = initialValue === result
     const startPart = text.slice(0, startOffset)
-    const targetPart = `<${word}::${result}>`
+    const targetPart = isDelete? word : `<${word}::${result}>`
     const endPart = text.slice(endOffset)
     setList(prevList => prevList.map(row => {
       if (row.id === id) {
