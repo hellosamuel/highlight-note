@@ -1,6 +1,6 @@
 module.exports = {
   preReg: /(<.+?:{2}.+?>)/g,
-  afterReg: /<(.+?):{2}(.+?)>/g,
+  afterReg: /<(.+?):{2}(.+?)>/,
   data: [
     {
       id: 1,

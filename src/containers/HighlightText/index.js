@@ -25,7 +25,7 @@ const HighlightText = ({ data, handleMouseUp }) => {
         let offset = 0
         const highlightedText = text.split(preReg).reduce((acc, val) => {
           if (preReg.test(val)) {
-            const [origin, word, category] = [...val.matchAll(afterReg)][0]
+            const [origin, word, category] = val.match(afterReg)
             acc.push(
               <Tooltip key={offset} title={category} placement="top">
                 <Typography
