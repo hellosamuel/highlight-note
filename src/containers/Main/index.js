@@ -69,7 +69,7 @@ const Main = ({ title }) => {
     }
 
     const { originTextId, word, startOffset, endOffset, initialValue } = selectedData
-    const { id, text } = list.find(({ id }) => originTextId === id)
+    const [{ id, text }] = list.filter(({ id }) => originTextId === id)
     const isDelete = initialValue === result
     const startPart = text.slice(0, startOffset)
     const targetPart = isDelete? word : `<${word}::${result}>`
